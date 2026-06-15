@@ -1,0 +1,37 @@
+Algorithm SentenceAnalysis
+
+Variables:
+    ch       : Character
+    nbChars  : Integer   // counter for total characters
+    nbWords  : Integer   // counter for number of words
+    nbVowels : Integer   // counter for number of vowels
+
+Begin
+    nbChars  <- 0
+    nbWords  <- 1
+    nbVowels <- 0
+
+    Read(ch)
+
+    While ch != '.' Do
+
+        nbChars <- nbChars + 1
+
+        If ch = ' ' Then
+            nbWords <- nbWords + 1
+        End If
+
+        If ch = 'a' OR ch = 'e' OR ch = 'i' OR ch = 'o' OR ch = 'u'
+        OR ch = 'A' OR ch = 'E' OR ch = 'I' OR ch = 'O' OR ch = 'U' Then
+            nbVowels <- nbVowels + 1
+        End If
+
+        Read(ch)
+
+    End While
+
+    Write("Number of characters : ", nbChars)
+    Write("Number of words      : ", nbWords)
+    Write("Number of vowels     : ", nbVowels)
+
+End
