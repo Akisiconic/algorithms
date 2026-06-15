@@ -1,0 +1,53 @@
+Algorithm DistinctSum
+
+Variables:
+    set1, set2 : Array of Integer
+    n1, n2     : Integer        // sizes of each set
+    sum        : Integer
+    i, j       : Integer
+    found      : Boolean
+
+Begin
+    // --- Read Set 1 ---
+    Read(n1)
+    For i <- 1 to n1 Do
+        Read(set1[i])
+    End For
+
+    // --- Read Set 2 ---
+    Read(n2)
+    For i <- 1 to n2 Do
+        Read(set2[i])
+    End For
+
+    sum <- 0
+
+    // --- Add elements from set1 that are NOT in set2 ---
+    For i <- 1 to n1 Do
+        found <- false
+        For j <- 1 to n2 Do
+            If set1[i] = set2[j] Then
+                found <- true
+            End If
+        End For
+        If NOT found Then
+            sum <- sum + set1[i]
+        End If
+    End For
+
+    // --- Add elements from set2 that are NOT in set1 ---
+    For i <- 1 to n2 Do
+        found <- false
+        For j <- 1 to n1 Do
+            If set2[i] = set1[j] Then
+                found <- true
+            End If
+        End For
+        If NOT found Then
+            sum <- sum + set2[i]
+        End If
+    End For
+
+    Write("Sum of distinct elements: ", sum)
+
+End

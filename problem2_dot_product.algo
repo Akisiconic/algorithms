@@ -1,0 +1,108 @@
+// ============================================================
+//  VERSION 1 — using a PROCEDURE (ps passed by reference OUT)
+// ============================================================
+
+Procedure dot_product(v1: Array of Real, v2: Array of Real, n: Integer, ps: OUT Real)
+// ps is an OUT parameter — the result is written into it by the procedure
+Variables:
+    i : Integer
+Begin
+    ps <- 0
+    For i <- 1 to n Do
+        ps <- ps + v1[i] * v2[i]
+    End For
+End Procedure
+
+// ---
+
+Algorithm OrthogonalCheck_Procedure
+
+Variables:
+    v1, v2  : Array of Real
+    n       : Integer       // dimension of each vector
+    pairs   : Integer       // number of pairs to test
+    ps      : Real          // dot product result (filled by the procedure)
+    i, k    : Integer
+
+Begin
+    Read(pairs)     // how many pairs of vectors to test
+    Read(n)         // dimension (same for all vectors)
+
+    For k <- 1 to pairs Do
+
+        // Read vector v1
+        For i <- 1 to n Do
+            Read(v1[i])
+        End For
+
+        // Read vector v2
+        For i <- 1 to n Do
+            Read(v2[i])
+        End For
+
+        dot_product(v1, v2, n, ps)      // ps is filled by the procedure
+
+        If ps = 0 Then
+            Write("Pair ", k, ": vectors are ORTHOGONAL")
+        Else
+            Write("Pair ", k, ": vectors are NOT orthogonal (dot product = ", ps, ")")
+        End If
+
+    End For
+
+End
+
+
+// ============================================================
+//  VERSION 2 — using a FUNCTION (returns the dot product value)
+// ============================================================
+
+Function dot_product(v1: Array of Real, v2: Array of Real, n: Integer) : Real
+// The result is returned directly — no OUT parameter needed
+Variables:
+    result : Real
+    i      : Integer
+Begin
+    result <- 0
+    For i <- 1 to n Do
+        result <- result + v1[i] * v2[i]
+    End For
+    Return result
+End Function
+
+// ---
+
+Algorithm OrthogonalCheck_Function
+
+Variables:
+    v1, v2  : Array of Real
+    n       : Integer
+    pairs   : Integer
+    ps      : Real
+    i, k    : Integer
+
+Begin
+    Read(pairs)
+    Read(n)
+
+    For k <- 1 to pairs Do
+
+        For i <- 1 to n Do
+            Read(v1[i])
+        End For
+
+        For i <- 1 to n Do
+            Read(v2[i])
+        End For
+
+        ps <- dot_product(v1, v2, n)    // function returns the value directly
+
+        If ps = 0 Then
+            Write("Pair ", k, ": vectors are ORTHOGONAL")
+        Else
+            Write("Pair ", k, ": vectors are NOT orthogonal (dot product = ", ps, ")")
+        End If
+
+    End For
+
+End
